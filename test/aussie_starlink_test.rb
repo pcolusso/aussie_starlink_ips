@@ -15,32 +15,34 @@ class AussieStarlinkIPsTest < Minitest::Test
     stub_request(:get, "https://geoip.starlinkisp.net/feed.csv")
       .to_return(status: 200, body: @sample_csv)
 
-    result = AussieStarlinkIPs.fetch_list
-    assert_equal 2, result.size
-    assert_instance_of NetAddr::IPv4Net, result[0]
-    assert_instance_of NetAddr::IPv6Net, result[1]
+    result = AussieStarlinkIPs::IpList.from_starlink
+    assert_equal 1, result.v4.length
+    assert_equal 1, result.v6.length
+    assert_instance_of NetAddr::IPv4Net, result.v4[0]
+    assert_instance_of NetAddr::IPv6Net, result.v6[0]
   end
 
   def test_parse_csv
-    result = AussieStarlinkIPs.parse_csv(@sample_csv)
-    assert_equal 2, result.size
-    assert_instance_of NetAddr::IPv4Net, result[0]
-    assert_instance_of NetAddr::IPv6Net, result[1]
+    result = AussieStarlinkIPs::IpList.from_csv(@sample_csv)
+    assert_equal 1, result.v4.length
+    assert_equal 1, result.v6.length
+    assert_instance_of NetAddr::IPv4Net, result.v4[0]
+    assert_instance_of NetAddr::IPv6Net, result.v6[0]
   end
 
   def test_is_aussie
-    ip_list = AussieStarlinkIPs.parse_csv(@sample_csv)
+    result = AussieStarlinkIPs::IpList.from_csv(@sample_csv)
     
-    assert AussieStarlinkIPs.is_aussie?(ip_list, "192.168.0.1")
-    assert AussieStarlinkIPs.is_aussie?(ip_list, "2001:db8::1")
-    refute AussieStarlinkIPs.is_aussie?(ip_list, "10.0.0.1")
-    refute AussieStarlinkIPs.is_aussie?(ip_list, "8.8.8.8")
+    assert result.is_aussie?("192.168.0.1")
+    assert result.is_aussie?("2001:db8::1")
+    refute result.is_aussie?("10.0.0.1")
+    refute result.is_aussie?("8.8.8.8")
   end
 
   def test_fetch_list_failure
     stub_request(:get, "https://geoip.starlinkisp.net/feed.csv")
       .to_return(status: 404)
 
-    assert_raises(RuntimeError) { AussieStarlinkIPs.fetch_list }
+    assert_raises(RuntimeError) { AussieStarlinkIPs::IpList.from_starlink }
   end
 end

@@ -24,14 +24,13 @@ GEM
     rbs (3.6.1)
       logger
     rexml (3.3.8)
-    typeprof (0.21.11)
-      rbs (>= 1.8.1)
     webmock (3.24.0)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
+  arm64-darwin-22
   arm64-darwin-23
 
 DEPENDENCIES
@@ -39,7 +38,6 @@ DEPENDENCIES
   minitest (~> 5.1)
   rake
   rbs
-  typeprof
   webmock (~> 3.14)
 
 BUNDLED WITH

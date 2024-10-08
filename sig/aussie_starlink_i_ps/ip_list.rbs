@@ -1,0 +1,30 @@
+module NetAddr
+  class IPv4Net
+    def contains: () -> bool
+  end
+
+  class IPv6Net
+    def contains: () -> bool
+  end
+end
+
+module AussieStarlinkIPs
+  class IpList
+
+    @v4: Array[NetAddr::IPv4Net]
+    @v6: Array[NetAddr::IPv4Net]
+    @time_created: Time
+
+    attr_reader v4:  Array[NetAddr::IPv4Net]
+    attr_reader v6: Array[NetAddr::IPv4Net]
+    attr_reader time_created: Time
+
+    def initialize: (v4: Array[NetAddr::IPv4Net], v6: Array[NetAddr::IPv4Net]) -> IpList
+
+    def self.from_starlink: () -> IpList
+
+    def self.from_csv: (String file) -> IpList
+
+    def is_aussie?: (String ip) -> bool
+  end
+end
