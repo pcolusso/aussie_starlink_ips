@@ -1,0 +1,46 @@
+PATH
+  remote: .
+  specs:
+    aussie_starlink_ips (0.0.1)
+      csv (~> 3.3)
+      netaddr (~> 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
+    bigdecimal (3.1.8)
+    crack (1.0.0)
+      bigdecimal
+      rexml
+    csv (3.3.0)
+    hashdiff (1.1.1)
+    logger (1.6.1)
+    minitest (5.25.1)
+    netaddr (2.0.6)
+    public_suffix (6.0.1)
+    rake (13.2.1)
+    rbs (3.6.1)
+      logger
+    rexml (3.3.8)
+    typeprof (0.21.11)
+      rbs (>= 1.8.1)
+    webmock (3.24.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+
+PLATFORMS
+  arm64-darwin-23
+
+DEPENDENCIES
+  aussie_starlink_ips!
+  minitest (~> 5.1)
+  rake
+  rbs
+  typeprof
+  webmock (~> 3.14)
+
+BUNDLED WITH
+   2.4.1
